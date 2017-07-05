@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/GFocusFX.iml" filepath="$PROJECT_DIR$/.idea/modules/GFocusFX.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/GFocusFX_main.iml" filepath="$PROJECT_DIR$/.idea/modules/GFocusFX_main.iml" group="GFocusFX" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/GFocusFX_test.iml" filepath="$PROJECT_DIR$/.idea/modules/GFocusFX_test.iml" group="GFocusFX" />
+    </modules>
+  </component>
+</project>
