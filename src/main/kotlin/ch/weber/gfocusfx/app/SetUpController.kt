@@ -1,5 +1,7 @@
 package ch.weber.gfocusfx.app
 
+import ch.weber.gfocusfx.model.CameraMode
+import ch.weber.gfocusfx.util.WebServer
 import tornadofx.*
 
 /**
@@ -8,7 +10,10 @@ import tornadofx.*
 
 class SetUpController: Controller() {
     fun connect(port: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val webServer: WebServer = WebServer(port, "192.168.54.1")
+        webServer.setMode(CameraMode.CTRL)
+        webServer.getState()
+        webServer.startStream()
     }
 
 }
