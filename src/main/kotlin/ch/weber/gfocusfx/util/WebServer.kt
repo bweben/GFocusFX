@@ -11,6 +11,9 @@ import com.github.kittinunf.result.getAs
  */
 
 class WebServer(val port: String, val ip: String) {
+    private var myIp: InetAddress? = null
+    private var socket: DatagramSocket? = null
+
     init {
         FuelManager.instance.basePath = "http://$ip";
     }
@@ -43,5 +46,38 @@ class WebServer(val port: String, val ip: String) {
                 println(err)
             })
         }
+    }
+
+    fun getImageFromStream(): BufferedImage {
+        var receivedPacket: DatagramPacket
+        var outBuffer: ByteArray
+        var inBuffer: ByteArray = ByteArray(30000)
+        val soi: ByteArray
+        var offset = 132
+        var bufferedImage: BufferedImage
+
+        val todo = true
+        while (todo) {
+            try {
+                receivedPacket = DatagramPacket(inBuffer, inBuffer.size, myIp, port.toInt())
+                socket!!.receive(receivedPacket)
+                outBuffer = receivedPacket.data
+
+                var i = 130
+                while (i < 320) {
+                    if (outBuffer[i].toInt() == -1 && outBuffer[i + 1].toInt() == -40) {
+                        offset = i
+                    }
+                    i += 1
+                }
+
+                val newBuffer = java.util.Arrays.copyOfRange(outBuffer, offset, receivedPacket.getLength())
+                bufferedImage = ImageIO.read(ByteArrayInputStream(newBuffer))
+                //TODO put image out to display
+            } catch (ExceIO: IOException) {
+                println("Error with client request : " + ExceIO.message)
+            }
+        }
+        socket!!.close()
     }
 }
